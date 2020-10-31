@@ -46,13 +46,14 @@ class Calculator extends Component {
         //If the operator have been click (this.state.isOperatorChosen = true) then we should be writing the secondNumber
         if (this.state.isOperatorChosen) {
             this.setState({
-                secondNumber: event.target.innerText
+                secondNumber: this.state.secondNumber + event.target.innerText
             })
         } else {
             this.setState({
-                firstNumber: event.target.innerText
+                firstNumber: this.state.firstNumber + event.target.innerText
             })
         }
+        console.log(this.state.firstNumber)
     }
     //Handle operator clicked
     handleOperatorClick(event) {
