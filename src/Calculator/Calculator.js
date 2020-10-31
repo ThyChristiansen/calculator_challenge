@@ -16,6 +16,12 @@ class Calculator extends Component {
     }
 
     componentDidMount() {
+        //Get calculations when page have been load
+        this.getCalculationList();
+    }
+
+    //Get calculation list
+    getCalculationList() {
         axios.get("/api/all").then(res =>
             this.setState({
                 calculationList: res.data
@@ -48,7 +54,7 @@ class Calculator extends Component {
             })
         }
     }
-
+    //Handle operator clicked
     handleOperatorClick(event) {
         //Check if a first number has already been selected. Or we've already run a calculation, if so we just exit.
         if (!this.state.firstNumber || this.state.isCalculated) {
@@ -59,9 +65,10 @@ class Calculator extends Component {
             isOperatorChosen: true,
         })
     }
-
+    //Handle equal clicked
     handleEqualClick() {
         let result;
+        //Set this.state.firstNumber and this.state.secondNumber to the number
         let firstNumbers = parseInt(this.state.firstNumber);
         let secondNumbers = parseInt(this.state.secondNumber);
         if (this.state.operator === "+") {
@@ -82,6 +89,7 @@ class Calculator extends Component {
             return false;
         }
 
+        //Post the calculation to database
         setTimeout(() => {
             axios.post("/api/calculation", {
                 firstNumber: this.state.firstNumber,
@@ -89,7 +97,9 @@ class Calculator extends Component {
                 operator: this.state.operator,
                 result: this.state.result
             });
-        }, 1000);
+            this.getCalculationList();
+
+        }, 100);
 
     }
 
@@ -148,7 +158,7 @@ class Calculator extends Component {
                     </div>
                     <div class="display-results">
                         {this.state.calculationList.map((value) =>
-                            <div>
+                            <div key={value.id}>
                                 <span>{value.first_number}</span>
                                 <span>{value.operator}</span>
                                 <span>{value.second_number}</span>
