@@ -12,13 +12,17 @@ class Calculator extends Component {
         result: 0,
         isOperatorChosen: false,
         isCalculated: false,
+        calculationList: [],
     }
 
     componentDidMount() {
-        return axios.get("/api/all").then(res => 
-            console.log(res.data)
-          )
-          .catch(err => console.log(err));
+        axios.get("/api/all").then(res =>
+            this.setState({
+                calculationList: res.data
+            })
+        )
+            .catch(err => console.log(err));
+
     }
 
     //Handle number clicked
@@ -92,6 +96,8 @@ class Calculator extends Component {
 
 
     render() {
+        console.log(this.state.calculationList)
+
         return (
             <div class="col-lg-6">
                 <div class="calculator_body">
@@ -127,17 +133,9 @@ class Calculator extends Component {
                         </div>
                     </div>
                     <div class="display-results">
-                        <ul>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                            <li>1+1= 2</li>
-                        </ul>
+                        {this.state.calculationList.map((value) => 
+                            <p>{value.calculation}</p>
+                        )}
                     </div>
                 </div>
             </div >
