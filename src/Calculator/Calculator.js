@@ -5,7 +5,7 @@ import "./calculator.css"
 class Calculator extends Component {
 
     state = {
-        firstNumber: "",
+        firstNumber: "0",
         secondNumber: "",
         operator: "",
         result: 0,
@@ -13,42 +13,79 @@ class Calculator extends Component {
         isCalculated: false,
     }
 
-    handleNumberClick(event){
+    //Handle number clicked
+    handleNumberClick(event) {
+        //If the operator have been click (this.state.isOperatorChosen = true) then we should be writing the secondNumber
+        if (this.state.isOperatorChosen) {
+            this.setState({
+                secondNumber: event.target.innerText
+            })
+        } else {
+            this.setState({
+                firstNumber: event.target.innerText
+            })
+        }
+    }
+
+    handleOperatorClick(event) {
+        //Check if a first number has already been selected. Or we've already run a calculation, if so we just exit.
+        if (!this.state.firstNumber || this.state.isCalculated) {
+            return false;
+        }
         this.setState({
-            firstNumber: event.target.innerText
+            operator: event.target.innerText,
+            isOperatorChosen: true,
         })
+
         // console.log(event.target.innerText);
     }
 
-    handleOperatorClick(event){
+    handleEqualClick() {
+        let result;
+        let firstNumbers = parseInt(this.state.firstNumber);
+        let secondNumbers = parseInt(this.state.secondNumber);
+        if (this.state.operator === "+") {
+            result = firstNumbers + secondNumbers
+        } else if (this.state.operator === "-") {
+            result = firstNumbers - secondNumbers
+        } else if (this.state.operator === "x") {
+            result = firstNumbers * secondNumbers
+        } else if (this.state.operator === ":") {
+            result = firstNumbers / secondNumbers
+        }
+
         this.setState({
-            operator: event.target.innerText
+            isCalculated: true,
+            result: result
         })
-        console.log(event.target.innerText);
+        console.log(result)
     }
+
+
+
     render() {
         return (
             <div class="col-lg-6">
                 <div class="calculator_body">
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>1</button>
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>2</button>
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>3</button>
-                    <button class="button operate" onClick={(value)=>this.handleOperatorClick(value)}>+</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>1</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>2</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>3</button>
+                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)}>+</button>
                     <br />
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>4</button>
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>5</button>
-                    <button class="button number"onClick={(value)=>this.handleNumberClick(value)}>6</button>
-                    <button class="button number" onClick={(value)=>this.handleOperatorClick(value)}>-</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>4</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>5</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>6</button>
+                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)}>-</button>
                     <br />
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>7</button>
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>8</button>
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>9</button>
-                    <button class="button number" onClick={(value)=>this.handleOperatorClick(value)}>x</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>7</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>8</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>9</button>
+                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)}>x</button>
                     <br />
-                    <button class="button number" onClick={(value)=>this.handleNumberClick(value)}>0</button>
-                    <button class="button number" onClick={(value)=>this.handleOperatorClick(value)} >:</button>
-                    <button class="button number" onClick={(value)=>this.handleOperatorClick(value)}>C</button>
-                    <button class="button number" onClick={(value)=>this.handleOperatorClick(value)}>=</button>
+                    <button class="button number" onClick={(value) => this.handleNumberClick(value)}>0</button>
+                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)} >:</button>
+                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)}>C</button>
+                    <button class="button operate" onClick={(value) => this.handleEqualClick(value)}>=</button>
                 </div>
 
 
