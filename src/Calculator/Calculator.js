@@ -81,6 +81,16 @@ class Calculator extends Component {
         if (this.state.isCalculated) {
             return false;
         }
+
+        setTimeout(() => {
+            axios.post("/api/calculation", {
+                firstNumber: this.state.firstNumber,
+                secondNumber: this.state.secondNumber,
+                operator: this.state.operator,
+                result: this.state.result
+            });
+        }, 1000);
+
     }
 
     handleClearClick() {
@@ -96,7 +106,6 @@ class Calculator extends Component {
 
 
     render() {
-        console.log(this.state.calculationList)
 
         return (
             <div class="col-lg-6">
@@ -126,15 +135,27 @@ class Calculator extends Component {
                 <div class="col-lg-6 ">
                     <div class="card display-calculation">
                         <div class="card-body">
-                            <p id="first-number">{this.state.firstNumber}</p>
-                            <p id="operator">{this.state.operator}</p>
-                            <p id="second-number">{this.state.secondNumber}</p>
-                            <p>{this.state.result}</p>
+                            <span id="first-number">{this.state.firstNumber}</span>
+                            <span id="ospanerator">{this.state.operator}</span>
+                            <span id="second-number">{this.state.secondNumber}</span>
+                            {this.state.isCalculated === true ?
+                                (<span>=</span>)
+                                :
+                                <span></span>
+                            }
+                            <span>{this.state.result}</span>
                         </div>
                     </div>
                     <div class="display-results">
-                        {this.state.calculationList.map((value) => 
-                            <p>{value.calculation}</p>
+                        {this.state.calculationList.map((value) =>
+                            <div>
+                                <span>{value.first_number}</span>
+                                <span>{value.operator}</span>
+                                <span>{value.second_number}</span>
+                                <span>=</span>
+
+                                <span>{value.result}</span>
+                            </div>
                         )}
                     </div>
                 </div>
