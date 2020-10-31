@@ -1,0 +1,23 @@
+body {
+	background: #a0a1a2;
+}
+
+.calculator_body {
+	width: 200px; 
+	height: 250px; 
+	background: #a0a1a2;
+	margin: 0px auto;
+	border-radius: 10px;
+	background: #a0a1a2;
+  box-shadow: 20px 20px 60px #88898a, -20px -20px 60px #b8b9ba;
+  padding: 20px;
+}
+
+.button {
+	width: 50px;
+	height: 50px;
+	border-radius: 32px;
+	background: #a0a1a2;
+  box-shadow: 21px 21px 41px #929393, -21px -21px 41px #aeafb1;
+  padding: 10px
+}
