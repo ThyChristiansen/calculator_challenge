@@ -118,7 +118,7 @@ class Calculator extends Component {
     render() {
 
         return (
-            <div class="col-lg-6">
+            <div class="col-lg-6 container">
                 <div class="calculator_body">
                     <button class="button number" onClick={(value) => this.handleNumberClick(value)}>1</button>
                     <button class="button number" onClick={(value) => this.handleNumberClick(value)}>2</button>

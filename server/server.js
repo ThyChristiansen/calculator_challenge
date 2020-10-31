@@ -11,11 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static directory
-app.use(express.static("public"));
+app.use(express.static('build'));
 
 
 // Routes
-
 require("./routes/calculator.router")(app);
 
 // Start the API server
