@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import "./calculator.css"
 
 class Calculator extends Component {
 
     state = {
-        firstNumber: "0",
+        firstNumber: "",
         secondNumber: "",
         operator: "",
         result: 0,
@@ -13,8 +14,25 @@ class Calculator extends Component {
         isCalculated: false,
     }
 
+    componentDidMount() {
+        return axios.get("/api/all").then(res => 
+            console.log(res.data)
+          )
+          .catch(err => console.log(err));
+    }
+
     //Handle number clicked
     handleNumberClick(event) {
+        // Check if we've already run a calculation, if so we'll just exist.
+        if (this.state.isCalculated) {
+            return false;
+        }
+
+        //set result to string after user clicked the firstNumber
+        this.setState({
+            result: ""
+        })
+
         //If the operator have been click (this.state.isOperatorChosen = true) then we should be writing the secondNumber
         if (this.state.isOperatorChosen) {
             this.setState({
@@ -36,8 +54,6 @@ class Calculator extends Component {
             operator: event.target.innerText,
             isOperatorChosen: true,
         })
-
-        // console.log(event.target.innerText);
     }
 
     handleEqualClick() {
@@ -53,14 +69,26 @@ class Calculator extends Component {
         } else if (this.state.operator === ":") {
             result = firstNumbers / secondNumbers
         }
-
         this.setState({
             isCalculated: true,
             result: result
-        })
-        console.log(result)
+        });
+        // If we already clicked equal, don't do the calculation again
+        if (this.state.isCalculated) {
+            return false;
+        }
     }
 
+    handleClearClick() {
+        this.setState({
+            firstNumber: "",
+            secondNumber: "",
+            operator: "",
+            result: 0,
+            isOperatorChosen: false,
+            isCalculated: false,
+        })
+    }
 
 
     render() {
@@ -84,7 +112,7 @@ class Calculator extends Component {
                     <br />
                     <button class="button number" onClick={(value) => this.handleNumberClick(value)}>0</button>
                     <button class="button operate" onClick={(value) => this.handleOperatorClick(value)} >:</button>
-                    <button class="button operate" onClick={(value) => this.handleOperatorClick(value)}>C</button>
+                    <button class="button operate" onClick={(value) => this.handleClearClick(value)}>C</button>
                     <button class="button operate" onClick={(value) => this.handleEqualClick(value)}>=</button>
                 </div>
 
