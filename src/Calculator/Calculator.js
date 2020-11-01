@@ -4,7 +4,6 @@ import axios from 'axios';
 import "./calculator.css"
 
 class Calculator extends Component {
-
     state = {
         firstNumber: "",
         secondNumber: "",
@@ -14,12 +13,10 @@ class Calculator extends Component {
         isCalculated: false,
         calculationList: [],
     }
-
     componentDidMount() {
         //Get calculations when page have been load
         this.getCalculationList();
     }
-
     //Get calculation list
     getCalculationList() {
         axios.get("/api/all").then(res =>
@@ -30,7 +27,6 @@ class Calculator extends Component {
             .catch(err => console.log(err));
 
     }
-
     //Handle number clicked
     handleNumberClick(event) {
         // Check if we've already run a calculation, if so we'll just exist.
@@ -96,7 +92,6 @@ class Calculator extends Component {
         if (this.state.isCalculated) {
             return false;
         }
-
         //Post the calculation to database
         setTimeout(() => {
             axios.post("/api/calculation", {

@@ -1,7 +1,6 @@
 body {
 	background: #a0a1a2;
 }
-
 .container {
   margin-top: 50px;
 
@@ -13,12 +12,10 @@ body {
   box-shadow: 20px 20px 60px #88898a, -20px -20px 60px #b8b9ba;
   margin: 0px 0px auto 0 ;
 }
-
 .calculator_body {
   padding: 20px;
   background-color: rgb(179, 179, 179);
 }
-
 .button {
 	width: 50px;
 	height: 50px;
@@ -27,18 +24,15 @@ body {
 	box-shadow: 21px 21px 41px #929393, -21px -21px 41px #aeafb1;
 	padding: 10px;
 }
-
 .display-calculation {
 	color: white;
 	background-color: black;
 	border-radius: 10px;
 	padding: 20px;
 }
-
 .text_content {
 	font-size: large;
 }
-
 .display-results {
 	margin-top: 2px;
 	color: white;
