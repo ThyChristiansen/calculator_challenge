@@ -83,7 +83,14 @@ class Calculator extends Component {
         }
         this.setState({
             isCalculated: true,
-            result: result
+            result: result,
+            calculationList: [...this.state.calculationList, {
+                firstNumber: this.state.firstNumber,
+                secondNumber: this.state.secondNumber,
+                operator: this.state.operator,
+                result: result,
+            }]
+
         });
         // If we already clicked equal, don't do the calculation again
         if (this.state.isCalculated) {
@@ -97,7 +104,9 @@ class Calculator extends Component {
                 secondNumber: this.state.secondNumber,
                 operator: this.state.operator,
                 result: this.state.result
-            });
+            })
+
+            localStorage.setItem('calculationList', JSON.stringify(this.state.calculationList));
             this.getCalculationList();
 
         }, 100);
@@ -160,16 +169,27 @@ class Calculator extends Component {
                             </div>
                         </div>
                         <div class="display-results">
-                            {this.state.calculationList.map((value) =>
-                                <div key={value.id}>
-                                    <span>{value.first_number}</span>
-                                    <span>{value.operator}</span>
-                                    <span>{value.second_number}</span>
-                                    <span>=</span>
-
-                                    <span>{value.result}</span>
-                                </div>
-                            )}
+                            {this.state.calculationList ?
+                                (JSON.parse(localStorage.getItem('calculationList')).map((value) =>
+                                    <div key={value.id}>
+                                        <span>{value.first_number}</span>
+                                        <span>{value.operator}</span>
+                                        <span>{value.second_number}</span>
+                                        <span>=</span>
+                                        <span>{value.result}</span>
+                                    </div>
+                                ))
+                                :
+                                (this.state.calculationList.map((value) =>
+                                    <div key={value.id}>
+                                        <span>{value.first_number}</span>
+                                        <span>{value.operator}</span>
+                                        <span>{value.second_number}</span>
+                                        <span>=</span>
+                                        <span>{value.result}</span>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
@@ -178,3 +198,5 @@ class Calculator extends Component {
     }
 }
 export default Calculator;
+
+
