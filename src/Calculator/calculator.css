@@ -29,7 +29,6 @@ body {
 }
 
 .display-calculation {
-	width: 200px;
 	color: white;
 	background-color: black;
 	border-radius: 10px;
@@ -42,7 +41,6 @@ body {
 
 .display-results {
 	margin-top: 2px;
-	width: 200px;
 	color: white;
 	background-color: rgb(101, 101, 101);
 	border-radius: 10px;

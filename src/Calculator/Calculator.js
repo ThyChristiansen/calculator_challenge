@@ -115,11 +115,10 @@ class Calculator extends Component {
         })
     }
 
-
     render() {
         return (
             <div class="container">
-                <div class="row mx-auto">
+                <div class="row">
                     <div class="col-lg-4 mx-auto">
                         <div class="calculator">
                             <h3 class="card-header">Calculator</h3>
@@ -147,7 +146,7 @@ class Calculator extends Component {
                         </div>
                     </div>
                     <div class="col-lg-4 mx-auto">
-                        <div class="card display-calculation">
+                        <div class="card-body display-calculation">
                             <div class="text_content">
                                 <span id="first-number">{this.state.firstNumber}</span>
                                 <span id="ospanerator">{this.state.operator}</span>
