@@ -81,8 +81,8 @@ class Calculator extends Component {
             isCalculated: true,
             result: result,
             calculationList: [...this.state.calculationList, {
-                firstNumber: this.state.firstNumber,
-                secondNumber: this.state.secondNumber,
+                first_number: firstNumbers,
+                second_number: secondNumbers,
                 operator: this.state.operator,
                 result: result,
             }]
@@ -165,7 +165,7 @@ class Calculator extends Component {
                         </div>
                         <div class="display-results">
                             {this.state.calculationList ?
-                                (JSON.parse(localStorage.getItem('calculationList')).map((value) =>
+                                (this.state.calculationList.map((value) =>
                                     <div key={value.id}>
                                         <span>{value.first_number}</span>
                                         <span>{value.operator}</span>
@@ -175,7 +175,7 @@ class Calculator extends Component {
                                     </div>
                                 ))
                                 :
-                                (this.state.calculationList.map((value) =>
+                                (JSON.parse(localStorage.getItem('calculationList')).map((value) =>
                                     <div key={value.id}>
                                         <span>{value.first_number}</span>
                                         <span>{value.operator}</span>
