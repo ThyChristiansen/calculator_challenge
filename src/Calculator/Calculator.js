@@ -49,7 +49,6 @@ class Calculator extends Component {
                 firstNumber: this.state.firstNumber + event.target.innerText
             })
         }
-        console.log(this.state.firstNumber)
     }
     //Handle operator clicked
     handleOperatorClick(event) {
